@@ -1,0 +1,22 @@
+# Approved official PyTorch 2.7.1 / CUDA 12.8 runtime; dependency layers are shared.
+ARG UNO_DEPENDENCY_BASE=pytorch/pytorch@sha256:c16f4c749e2d9e96878875cdf6cc45cddda1d1a36fddd371dd6f2360f1b6e2a2
+FROM ${UNO_DEPENDENCY_BASE} AS weights
+WORKDIR /app
+COPY examples/ml_fixture/model.py ./model.py
+RUN python model.py
+
+FROM ${UNO_DEPENDENCY_BASE}
+WORKDIR /app
+LABEL org.triad-uno.protocol="1.0" org.triad-uno.runtime="2" org.triad-uno.sdk="uno-sdk-2" \
+      org.triad-uno.cpu="0.5" org.triad-uno.ram-bytes="1073741824" \
+      org.triad-uno.scratch-bytes="134217728" org.triad-uno.pids="64" \
+      org.triad-uno.gpu="true" org.triad-uno.gpu-bytes="536870912"
+COPY src/ ./src/
+COPY examples/ml_fixture/agent.py examples/ml_fixture/model.py ./examples/ml_fixture/
+COPY models/ ./models/
+COPY --from=weights /app/models/policy.pt ./models/policy.pt
+COPY examples/ml_fixture/submission.cuda.json ./submission.json
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 HOME=/tmp
+ENV UNO_REQUIRE_CUDA=1
+USER 10000:10000
+ENTRYPOINT ["python", "examples/ml_fixture/agent.py"]

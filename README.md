@@ -35,8 +35,8 @@ baselines, training, validation and snapshot provenance.
 
 ## Participant resource limits
 
-RAM is limited to **1 GiB**, GPU VRAM to **1 GiB**, and the complete submission to
-**1.5 GiB**. Existing turn-limit scoring and timing rules remain unchanged.
+RAM is limited to **1 GiB**, GPU VRAM to **1 GiB**, and participant code/assets to
+**1.5 GiB**. Organizer-approved dependency bases are exempt from image accounting. Existing turn-limit scoring and timing rules remain unchanged.
 See [resource limits and the Git-aware size checker](docs/resource-limits.md).
 
 ## Contributor setup

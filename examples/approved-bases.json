@@ -1,0 +1,5 @@
+{
+  "approved_bases": [
+    "pytorch/pytorch@sha256:c16f4c749e2d9e96878875cdf6cc45cddda1d1a36fddd371dd6f2360f1b6e2a2"
+  ]
+}

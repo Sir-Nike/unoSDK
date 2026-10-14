@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check Git submission contents and optionally the built image against 1.5 GiB."""
+"""Check code/assets and optionally exempt verified organizer dependency bases."""
 from __future__ import annotations
 
 import argparse
@@ -8,6 +8,9 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from submission_image_size import measure_submission_image
 
 MAX_BYTES = 3 * 1024**3 // 2
 LFS_HEADER = b"version https://git-lfs.github.com/spec/v1\n"
@@ -145,14 +148,23 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--revision", help="check an exact commit instead of tracked/unignored working files")
-    parser.add_argument("--image", help="also check a locally built Docker image, including dependencies")
+    parser.add_argument("--image", help="also check a locally built participant image")
+    parser.add_argument("--approved-base", action="append", default=[],
+                        help="organizer-approved dependency base digest; repeat for multiple bases")
     parser.add_argument("--json", action="store_true", help="emit a machine-readable report")
     args = parser.parse_args()
     try:
+        if args.approved_base and not args.image:
+            raise ValueError("--approved-base requires --image")
         report = inventory(args.repo, args.revision)
         if args.image:
-            size = image_size(args.image)
-            report["image"] = {"reference": args.image, "bytes": size, "ok": size <= MAX_BYTES}
+            if args.approved_base:
+                report["image"] = measure_submission_image(
+                    args.image, args.approved_base, limit_bytes=MAX_BYTES
+                )
+            else:
+                size = image_size(args.image)
+                report["image"] = {"reference": args.image, "bytes": size, "ok": size <= MAX_BYTES}
             report["ok"] = report["ok"] and report["image"]["ok"]
     except (OSError, ValueError, subprocess.SubprocessError, KeyError, IndexError) as exc:
         print(f"Unable to check submission: {exc}", file=sys.stderr)
@@ -169,9 +181,15 @@ def main() -> int:
         if report["lfs_pointers"]:
             print("LFS assets counted at declared size; this does not verify uploaded LFS objects.")
         if args.image:
-            print(f"Image: {report['image']['bytes']:,} / {MAX_BYTES:,} bytes")
+            item = report["image"]
+            if "approved_base" in item:
+                print(f"Participant layers: {item['participant_bytes']:,} / {MAX_BYTES:,} bytes")
+                print(f"Exempt dependency base: {item['exempt_base_bytes']:,} bytes ({item['approved_base']})")
+                print(f"Complete image: {item['total_bytes']:,} bytes")
+            else:
+                print(f"Image: {item['bytes']:,} / {MAX_BYTES:,} bytes (no approved-base exemption)")
         else:
-            print("Built dependencies are checked separately: add --image YOUR_IMAGE after building.")
+            print("Add --image YOUR_IMAGE --approved-base ORGANIZER_DIGEST to verify the dependency exemption.")
     return 0 if report["ok"] else 1
 
 

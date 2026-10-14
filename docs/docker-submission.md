@@ -23,8 +23,8 @@ not a hard CUDA memory cap. The prescribed UID is enforced again at launch.
 untrained Torch policy running on CPU. `Dockerfile.gpu`: the same UNO-compatible
 fixture requiring CUDA. The GPU example requests 0.5 CPU, 1 GiB RAM, 1 GiB scratch,
 128 PIDs and 512 MiB GPU reservation. The CPU and CUDA fixtures pin Torch
-2.6.0+cpu and 2.6.0+cu124 in separate `pyproject.toml`/`uv.lock` pairs under
-`examples/ml_fixture/cpu/` and `examples/ml_fixture/cu124/`. Each Dockerfile
+2.7.1+cpu and 2.7.1+cu128 in separate `pyproject.toml`/`uv.lock` pairs under
+`examples/ml_fixture/cpu/` and `examples/ml_fixture/cu128/`. Each Dockerfile
 copies uv 0.11.28 from its published image, syncs the matching lock with
 `--locked`, and carries only that environment into the final image. Pin your
 Python and uv base images before a release. For air-gapped builds, stage the
@@ -66,3 +66,29 @@ CPU preflight: `python -m triad_uno.image_check IMAGE --manifest EVENT.json`.
 GPU preflight: organizer-approved `python -m triad_uno.hardware EVENT.json
 --output verification-output/preflight --mode preflight --execute`.
 See the organizer's RUNNING.md for build, registry, event and resume commands.
+
+## Approved shared GPU base
+
+`Dockerfile.gpu.shared` uses the official PyTorch 2.7.1 / CUDA 12.8 runtime:
+
+```dockerfile
+FROM pytorch/pytorch@sha256:c16f4c749e2d9e96878875cdf6cc45cddda1d1a36fddd371dd6f2360f1b6e2a2
+```
+
+This runtime includes Blackwell sm_100/sm_120 kernels. The local fixture creates
+its own policy weights in a build stage; those assets count as participant layers.
+The organizer approves the digest in `examples/approved-bases.json` and sets
+`approved_bases` on the event manifest. All participant-added layers count toward
+1.5 GiB; exact approved base layers are exempt. Additional installed dependencies
+count unless the organizer publishes and approves a new dependency-only base.
+
+```sh
+docker build --platform linux/amd64 -f Dockerfile.gpu.shared -t uno-ml:shared .
+python tools/check_submission_size.py --image uno-ml:shared \
+  --approved-base pytorch/pytorch@sha256:c16f4c749e2d9e96878875cdf6cc45cddda1d1a36fddd371dd6f2360f1b6e2a2
+```
+
+The checker is included in unoSDK. Participant images must be published and
+submitted by immutable digest. Docker reuses identical base layers on the same
+host; the standalone `Dockerfile.gpu` installs its own environment and does not
+receive this dependency exemption. CPU-only bases need separate organizer approval.

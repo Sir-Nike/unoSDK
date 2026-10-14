@@ -98,6 +98,21 @@ class SubmissionSizeTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 checker.image_size("agent:local")
 
+    def test_approved_base_exemption_is_reported_without_charging_full_image(self):
+        (self.repo / "agent.py").write_text("pass")
+        base = "example/base@sha256:" + "a" * 64
+        image = {"reference": "agent:local", "approved_base": base,
+                 "total_bytes": 5 * 1024**3, "participant_bytes": 100,
+                 "exempt_base_bytes": 5 * 1024**3 - 100, "ok": True}
+        output = io.StringIO()
+        with patch.object(sys, "argv", [str(SCRIPT), "--repo", str(self.repo),
+                                        "--image", "agent:local", "--approved-base", base, "--json"]), \
+             patch.object(checker, "measure_submission_image", return_value=image) as measure, \
+             patch("sys.stdout", output):
+            self.assertEqual(checker.main(), 0)
+        self.assertTrue(json.loads(output.getvalue())["ok"])
+        measure.assert_called_once_with("agent:local", [base], limit_bytes=checker.MAX_BYTES)
+
     def test_compressed_image_layers_cannot_bypass_size_limit(self):
         def exported_image(payload):
             blob = io.BytesIO()
