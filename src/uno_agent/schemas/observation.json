@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/observation.json",
+  "title": "Observation",
+  "description": "Per-seat filtered broadcast. Own hand uses local h-refs; never global deck ids, other hands, draw order, seed, or RNG state.",
+  "type": "object",
+  "required": [
+    "seat",
+    "phase",
+    "turn_number",
+    "turns_completed",
+    "direction",
+    "active_color",
+    "hand",
+    "hand_sizes",
+    "top_discard",
+    "draw_pile_size",
+    "discard_pile_size",
+    "history",
+    "private_events",
+    "drawn_card_ref",
+    "legal_actions",
+    "finished_order",
+    "is_finished"
+  ],
+  "properties": {
+    "seat": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "CHOOSE_INITIAL_COLOR",
+        "TURN",
+        "AFTER_DRAW",
+        "FINISHED"
+      ]
+    },
+    "turn_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "turns_completed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "direction": {
+      "type": "integer",
+      "enum": [
+        1,
+        -1
+      ]
+    },
+    "active_color": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "red",
+        "yellow",
+        "green",
+        "blue",
+        null
+      ]
+    },
+    "hand": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "card_ref",
+          "color",
+          "kind",
+          "value"
+        ],
+        "properties": {
+          "card_ref": {
+            "type": "string",
+            "pattern": "^h[0-9]+$"
+          },
+          "color": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "red",
+              "yellow",
+              "green",
+              "blue",
+              null
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "number",
+              "skip",
+              "reverse",
+              "draw_two",
+              "wild",
+              "wild_draw_four"
+            ]
+          },
+          "value": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 9
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "hand_sizes": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "top_discard": {
+      "$ref": "card.json"
+    },
+    "draw_pile_size": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "discard_pile_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "private_events": {
+      "type": "array"
+    },
+    "drawn_card_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(h[0-9]+)?$"
+    },
+    "legal_actions": {
+      "type": "array",
+      "items": {
+        "$ref": "legal_action.json"
+      }
+    },
+    "finished_order": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 3
+      }
+    },
+    "is_finished": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}

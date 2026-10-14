@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/game_over.json",
+  "title": "GameOver",
+  "description": "Organizer -> agent: terminal notification. Agent replies done; container is then destroyed.",
+  "type": "object",
+  "required": [
+    "type",
+    "protocol_version",
+    "request_id",
+    "game_id",
+    "outcome",
+    "final_observation"
+  ],
+  "properties": {
+    "type": {
+      "const": "game_over"
+    },
+    "protocol_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "game_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "outcome": {
+      "$ref": "outcome.json"
+    },
+    "final_observation": {
+      "$ref": "observation.json"
+    }
+  },
+  "additionalProperties": false
+}

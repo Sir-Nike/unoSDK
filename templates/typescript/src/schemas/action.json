@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/action.json",
+  "title": "Action",
+  "description": "Agent -> organizer: selected move. action_id must be one of the current legal_actions; agent_state is the optional checkpoint update (<=1 MiB).",
+  "type": "object",
+  "required": [
+    "type",
+    "request_id",
+    "action_id"
+  ],
+  "properties": {
+    "type": {
+      "const": "action"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "action_id": {
+      "type": "string",
+      "pattern": "^a[0-9]+$"
+    },
+    "agent_state": true
+  },
+  "additionalProperties": false
+}

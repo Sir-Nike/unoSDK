@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/act.json",
+  "title": "Act",
+  "description": "Organizer -> agent: one decision request with the filtered observation and last accepted checkpoint.",
+  "type": "object",
+  "required": [
+    "type",
+    "protocol_version",
+    "request_id",
+    "game_id",
+    "observation",
+    "agent_state"
+  ],
+  "properties": {
+    "type": {
+      "const": "act"
+    },
+    "protocol_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "game_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observation": {
+      "$ref": "observation.json"
+    },
+    "agent_state": true
+  },
+  "additionalProperties": false
+}

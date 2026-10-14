@@ -1,0 +1,5 @@
+[flake8]
+# Match the project's 100-column style (see also the pylint/mypy settings in
+# pyproject.toml).
+max-line-length = 100
+extend-exclude = .git,__pycache__,.ruff_cache,.mypy_cache

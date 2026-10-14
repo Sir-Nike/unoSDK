@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/done.json",
+  "title": "Done",
+  "description": "Agent -> organizer: acknowledgement of game_over.",
+  "type": "object",
+  "required": [
+    "type",
+    "request_id"
+  ],
+  "properties": {
+    "type": {
+      "const": "done"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/initialize.json",
+  "title": "Initialize",
+  "description": "Organizer -> agent: start of a game lifecycle. Agent loads weights and replies ready.",
+  "type": "object",
+  "required": [
+    "type",
+    "protocol_version",
+    "request_id",
+    "game_id",
+    "seat",
+    "ruleset",
+    "config"
+  ],
+  "properties": {
+    "type": {
+      "const": "initialize"
+    },
+    "protocol_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "game_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "seat": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "ruleset": {
+      "const": "triad-uno-v1"
+    },
+    "config": {
+      "type": "object",
+      "required": [
+        "max_turns"
+      ],
+      "properties": {
+        "max_turns": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "players": {
+          "type": "integer",
+          "const": 4
+        },
+        "initial_hand_size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 25
+        },
+        "position_points": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "ruleset_version": {
+          "const": "triad-uno-v1"
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

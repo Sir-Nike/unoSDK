@@ -1,0 +1,14 @@
+{
+  "name": "uno-ts-starter",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "unoSDK TypeScript UNO starter (Node standard library only, no build step)",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "start": "node src/agent.ts",
+    "smoke": "python3 tools/check.py --agent ts"
+  }
+}

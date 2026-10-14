@@ -1,0 +1,39 @@
+# Tooling configuration for the unoSDK starter.
+#
+# The runtime has no third-party dependencies; this file only configures the
+# local lint and type tools. The vendored wire contract in
+# ``src/uno_agent/protocol.py`` ships byte-for-byte from the UNO engine
+# revision recorded in ``src/uno_agent/VENDOR.json`` (see
+# ``tests/test_compat.py``), so it must not be edited to satisfy a linter and
+# is therefore excluded from the checks below.
+
+[project]
+name = "uno-sdk-starter"
+version = "0.1.0"
+description = "Triad UNO participant starter and local validation tools"
+requires-python = ">=3.11"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+required-version = "==0.11.28"
+package = false
+
+[tool.pylint.main]
+ignore-paths = [".*uno_agent/protocol[.]py$"]
+
+[tool.pylint.similarities]
+# The stdlib-only module bootstrap loader is intentionally repeated in the
+# entrypoint (which cannot depend on the test tree), so only flag large
+# copy-paste blocks.
+min-similarity-lines = 12
+
+[tool.mypy]
+strict = true
+files = ["src", "tests", "tools", "examples"]
+
+[[tool.mypy.overrides]]
+module = "uno_agent.protocol"
+ignore_errors = true

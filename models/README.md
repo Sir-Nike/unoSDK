@@ -1,0 +1,1 @@
+Package model weights here before building. No runtime downloads. The SDK ML fixture builds a tiny untrained policy during image construction; it is a verification fixture, not a competitive UNO model.

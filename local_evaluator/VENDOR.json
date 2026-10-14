@@ -1,0 +1,87 @@
+{
+  "game": "uno",
+  "source_revision": "a7eca38c04081f017db6182554507905bfb1e48f",
+  "files": {
+    "__init__.py": {
+      "source_sha256": "95370bac24e610c551e16f7f70921e5dec65ea9be281e509083cc3016565f092",
+      "bundled_sha256": "95370bac24e610c551e16f7f70921e5dec65ea9be281e509083cc3016565f092"
+    },
+    "cards.py": {
+      "source_sha256": "b0e124a8d7d7970fb1cabf946228e9bf6e69ae301b4cd00389b8320a85e23df6",
+      "bundled_sha256": "b0e124a8d7d7970fb1cabf946228e9bf6e69ae301b4cd00389b8320a85e23df6"
+    },
+    "engine.py": {
+      "source_sha256": "7d71b5e72efb7885f7f6b9c31283725c204213862ec89321b5ab4880d7956ad3",
+      "bundled_sha256": "393244a225df054bc3f59b8548f683f9bcfadfecdd8fc59f24a8c5ee310cfd90"
+    },
+    "protocol.py": {
+      "source_sha256": "b7a852e3a226a4c551c75f816da64fe5893b3c7366615135d18ca832ba84018c",
+      "bundled_sha256": "b7a852e3a226a4c551c75f816da64fe5893b3c7366615135d18ca832ba84018c"
+    },
+    "baselines.py": {
+      "source_sha256": "dd9442cd8bc8f59ca13a2b48a7a44ac1389ec9d9f78b4865c4c368c02d61fef0",
+      "bundled_sha256": "dd9442cd8bc8f59ca13a2b48a7a44ac1389ec9d9f78b4865c4c368c02d61fef0"
+    },
+    "simulator.py": {
+      "source_sha256": "9e2d2837d45c639a4ef77cfef94f8bceef4b07bacd12af5aeb850d9d1a8204d1",
+      "bundled_sha256": "9e2d2837d45c639a4ef77cfef94f8bceef4b07bacd12af5aeb850d9d1a8204d1"
+    },
+    "local_runner.py": {
+      "source_sha256": "0c3c5f5586b5c26db6bd8cccf6139f77bb797c8c4d68189f19cae96a79e51de7",
+      "bundled_sha256": "0c3c5f5586b5c26db6bd8cccf6139f77bb797c8c4d68189f19cae96a79e51de7"
+    },
+    "agent_session.py": {
+      "source_sha256": "13b9c989f8cd69ac9163383402f98a32a9e1d261fc9ad1f0b249479a7c376387",
+      "bundled_sha256": "13b9c989f8cd69ac9163383402f98a32a9e1d261fc9ad1f0b249479a7c376387"
+    },
+    "scoring.py": {
+      "source_sha256": "16b63d43a5a9550da08bbbce18de2b090ebc47a2fa73e9efc5b13fce5c75419f",
+      "bundled_sha256": "d18f5c174f3b988bf946f6665611ccf1f99d23c8149fac4aa43bcab672dd7520"
+    },
+    "schemas/act.json": {
+      "source_sha256": "b07b52766991e8d63fbfda6fb388bb4858b4928eaa8e77b0c9da09352c4edf71",
+      "bundled_sha256": "b07b52766991e8d63fbfda6fb388bb4858b4928eaa8e77b0c9da09352c4edf71"
+    },
+    "schemas/action.json": {
+      "source_sha256": "3a0a2b799ce8ecc3e9dd608ab83e94af2003b8c89b78437662ab8c051e563e3f",
+      "bundled_sha256": "3a0a2b799ce8ecc3e9dd608ab83e94af2003b8c89b78437662ab8c051e563e3f"
+    },
+    "schemas/card.json": {
+      "source_sha256": "7926bcc69d17cc229a4cf94b65ffdf20fe573d681c10fd228f685b6097368d15",
+      "bundled_sha256": "7926bcc69d17cc229a4cf94b65ffdf20fe573d681c10fd228f685b6097368d15"
+    },
+    "schemas/done.json": {
+      "source_sha256": "ededcc53e6a20ca88341e7cc5c9efbc2470ca52156c45967556c3379180de2e3",
+      "bundled_sha256": "ededcc53e6a20ca88341e7cc5c9efbc2470ca52156c45967556c3379180de2e3"
+    },
+    "schemas/game_over.json": {
+      "source_sha256": "a11f309c63e4a4023097d7ea398b3f49c77bf5b285705d3430bb2a5918d15b07",
+      "bundled_sha256": "a11f309c63e4a4023097d7ea398b3f49c77bf5b285705d3430bb2a5918d15b07"
+    },
+    "schemas/initialize.json": {
+      "source_sha256": "c2f846c1ec9621d5d7e4952b1e67b08085293de6f0d8f0172c48a482fdf7a79c",
+      "bundled_sha256": "c2f846c1ec9621d5d7e4952b1e67b08085293de6f0d8f0172c48a482fdf7a79c"
+    },
+    "schemas/legal_action.json": {
+      "source_sha256": "ba05bc35540a4d3ee6bae1b38c3266c8bae47523c2bbab6dc95862aacb8b2f15",
+      "bundled_sha256": "ba05bc35540a4d3ee6bae1b38c3266c8bae47523c2bbab6dc95862aacb8b2f15"
+    },
+    "schemas/observation.json": {
+      "source_sha256": "b3c7154f9287661cfcca616c9c606a9f49a7eeeef301ab3b093d3bce32c8f7c7",
+      "bundled_sha256": "b3c7154f9287661cfcca616c9c606a9f49a7eeeef301ab3b093d3bce32c8f7c7"
+    },
+    "schemas/outcome.json": {
+      "source_sha256": "0bb4611330284a75a7130841a1d50fac2d02ba0b2f24f656a3f8a2cec9689bad",
+      "bundled_sha256": "0bb4611330284a75a7130841a1d50fac2d02ba0b2f24f656a3f8a2cec9689bad"
+    },
+    "schemas/ready.json": {
+      "source_sha256": "fbf088de447ac1a4b95992df15f7f1e96fa5eb1dfdb8a63916bbc2d809a895e8",
+      "bundled_sha256": "fbf088de447ac1a4b95992df15f7f1e96fa5eb1dfdb8a63916bbc2d809a895e8"
+    }
+  },
+  "adaptations": [
+    "engine.py: fixed player count is a read-only property backed by SEATS",
+    "scoring.py: SDK event scorer replaces legacy historical scorer"
+  ],
+  "source_kind": "working-tree"
+}

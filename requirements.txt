@@ -1,0 +1,6 @@
+# unoSDK Python starter: standard library only, no third-party dependencies.
+#
+# The developer environment is managed by pyproject.toml and uv.lock.
+# If your strategy needs runtime packages, declare and lock them with `uv add`,
+# then stage verified wheels for an offline Docker build. Evaluation runs with
+# no network access.

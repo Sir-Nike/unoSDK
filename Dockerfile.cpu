@@ -1,0 +1,12 @@
+FROM python:3.11-slim
+WORKDIR /app
+LABEL org.triad-uno.protocol="1.0" org.triad-uno.runtime="2" org.triad-uno.sdk="uno-sdk-2" \
+      org.triad-uno.cpu="1" org.triad-uno.ram-bytes="1073741824" \
+      org.triad-uno.scratch-bytes="1073741824" org.triad-uno.pids="128" \
+      org.triad-uno.gpu="false" org.triad-uno.gpu-bytes="0"
+COPY src/ ./src/
+COPY models/ ./models/
+COPY submission.json ./
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PYTHONIOENCODING=utf-8 HOME=/tmp
+USER 10000:10000
+ENTRYPOINT ["python", "src/agent.py"]

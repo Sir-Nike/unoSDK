@@ -1,0 +1,17 @@
+[project]
+name = "uno-ml-cu124-fixture"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+dependencies = ["torch==2.6.0+cu124"]
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu124" }
+
+[tool.uv]
+required-version = "==0.11.28"
+package = false

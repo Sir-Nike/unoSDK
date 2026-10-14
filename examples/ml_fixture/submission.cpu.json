@@ -1,0 +1,28 @@
+{
+  "game": "triad-uno-v1",
+  "protocol_version": "1.0",
+  "sdk_version": "uno-sdk-2",
+  "runtime_version": "2",
+  "platform": "linux/amd64",
+  "uid": 10000,
+  "entrypoint": [
+    "python",
+    "examples/ml_fixture/agent.py"
+  ],
+  "execution": "cpu",
+  "language": "python",
+  "models": [
+    {
+      "path": "models/policy.pt",
+      "purpose": "untrained inference verification",
+      "generated_at_build": true
+    }
+  ],
+  "resources": {
+    "cpu": 0.5,
+    "ram_bytes": 1073741824,
+    "scratch_bytes": 1073741824,
+    "max_processes": 128,
+    "gpu_bytes": 0
+  }
+}

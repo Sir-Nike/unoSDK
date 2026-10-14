@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/legal_action.json",
+  "title": "LegalAction",
+  "description": "One request-scoped legal action. action_id (a0..) is valid only for the issuing request; a0 is the deterministic fallback.",
+  "type": "object",
+  "required": [
+    "action_id",
+    "type"
+  ],
+  "properties": {
+    "action_id": {
+      "type": "string",
+      "pattern": "^a[0-9]+$"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "play",
+        "draw",
+        "keep",
+        "choose_color"
+      ]
+    },
+    "card_ref": {
+      "type": "string",
+      "pattern": "^h[0-9]+$"
+    },
+    "card": {
+      "$ref": "card.json"
+    },
+    "color": {
+      "type": "string",
+      "enum": [
+        "red",
+        "yellow",
+        "green",
+        "blue"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,17 @@
+[project]
+name = "uno-ml-cpu-fixture"
+version = "0.1.0"
+requires-python = ">=3.11,<3.12"
+dependencies = ["torch==2.6.0+cpu"]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[tool.uv]
+required-version = "==0.11.28"
+package = false

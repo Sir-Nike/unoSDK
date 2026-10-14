@@ -1,0 +1,23 @@
+{
+  "components": [
+    "uno_agent/protocol.py",
+    "uno_agent/schemas/*.json"
+  ],
+  "source_repository": "PRISM-TT/UNO (organizer game engine)",
+  "source_revision": "386eee85e8f9a8c87efc08277b966e753e1327a5",
+  "source_paths": [
+    "src/triad_uno/protocol.py",
+    "src/triad_uno/schemas/*.json"
+  ],
+  "protocol_version": "1.0",
+  "ruleset": "triad-uno-v1",
+  "vendored_on": "2026-10-13",
+  "notes": "protocol.py is stdlib-only and designed for vendoring. Verify with tests/test_compat.py against a separate UNO checkout. Four-player contract changes are uncommitted upstream; source_revision is the base commit and source_overrides records the exact changed source hashes.",
+  "source_kind": "working-tree",
+  "source_overrides": {
+    "src/triad_uno/protocol.py": "b7a852e3a226a4c551c75f816da64fe5893b3c7366615135d18ca832ba84018c",
+    "src/triad_uno/schemas/initialize.json": "c2f846c1ec9621d5d7e4952b1e67b08085293de6f0d8f0172c48a482fdf7a79c",
+    "src/triad_uno/schemas/observation.json": "b3c7154f9287661cfcca616c9c606a9f49a7eeeef301ab3b093d3bce32c8f7c7",
+    "src/triad_uno/schemas/outcome.json": "0bb4611330284a75a7130841a1d50fac2d02ba0b2f24f656a3f8a2cec9689bad"
+  }
+}

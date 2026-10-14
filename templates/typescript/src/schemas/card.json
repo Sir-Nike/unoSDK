@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/card.json",
+  "title": "CardView",
+  "description": "Public view of one card. Wild cards have color=null; number cards carry value 0-9.",
+  "type": "object",
+  "required": [
+    "color",
+    "kind",
+    "value"
+  ],
+  "properties": {
+    "color": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "red",
+        "yellow",
+        "green",
+        "blue",
+        null
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "number",
+        "skip",
+        "reverse",
+        "draw_two",
+        "wild",
+        "wild_draw_four"
+      ]
+    },
+    "value": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 9
+    }
+  },
+  "additionalProperties": false
+}

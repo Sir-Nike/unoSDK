@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://triad-tactics.local/schemas/v1/outcome.json",
+  "title": "Outcome",
+  "description": "UNO terminal outcome. placements is the confirmed finishing prefix; unfinished seats form the final tied ranking group for event position scoring.",
+  "type": "object",
+  "required": [
+    "placements",
+    "is_draw",
+    "unfinished",
+    "reason"
+  ],
+  "properties": {
+    "placements": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 3
+      }
+    },
+    "is_draw": {
+      "type": "boolean"
+    },
+    "unfinished": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 3
+      }
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "all_placed",
+        "turn_limit_empty",
+        "turn_limit_partial"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
